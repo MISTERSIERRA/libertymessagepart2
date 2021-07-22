@@ -18,14 +18,16 @@ if($resultFromViewMessagesRequest == true){
 
     }
 
+    $messagelistArrayReverse = array_reverse($messagelistArray, false);
+
     $responseData = [
         'response' => 'liste des messages', 
         'number' => $numberConnectFromVerifyToken, 
-        'messagelist' => $messagelistArray
+        'messagelist' => $messagelistArrayReverse
     ];
 }
 else{
-    $responseData = ['response' => 'erreur de lecture des messages'];
+    $responseData = ['response' => 'pas de messages'];
 }
 
 sendJsonToAngular($responseData);
