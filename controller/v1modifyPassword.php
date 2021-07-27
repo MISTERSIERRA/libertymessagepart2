@@ -1,22 +1,30 @@
 <?php
 
-$resultFromSecondRequest = readRequest(
+if(strlen($_POST['newpassword']) <= 20){
+    $resultFromSecondRequest = readRequest(
     searchUserNameRequest(), 
     searchUserNameArray($_POST['username'])
-);
+    );
 
-if(compareHashPass($_POST['password'], $resultFromSecondRequest[0]['userPass'])){
+    if(compareHashPass($_POST['password'], $resultFromSecondRequest[0]['userPass'])){
 
-        sendRequest(
-            modifyUserPassRequest(), 
-            modifyUserPassArray($resultFromSecondRequest[0]['idUser'], generateHashPass($_POST['newpassword']))
-        );
+            sendRequest(
+                modifyUserPassRequest(), 
+                modifyUserPassArray($resultFromSecondRequest[0]['idUser'], generateHashPass($_POST['newpassword']))
+            );
 
-        $responseData = [
-            'response' => 'mot de passe modifié', 
-            'number' => $numberConnectFromVerifyToken
-        ];
+            $responseData = [
+                'response' => 'mot de passe modifié', 
+                'number' => $numberConnectFromVerifyToken
+            ];
 
+    }
+    else{
+        $responseData = ['response' => 'informations incorrectes'];
+    }
+}
+else if(!(strlen($_POST['newpassword']) <= 20)){
+    $responseData = ['response' => 'Mot de passe trop long'];
 }
 else{
     $responseData = ['response' => 'informations incorrectes'];
