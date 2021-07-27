@@ -176,7 +176,7 @@ class RequestSql {
 		ON `user`.`idUser` = `access`.`idUser` 
 		LEFT JOIN `room` 
 		ON `access`.`idRoom` = `room`.`idRoom` 
-		WHERE `user`.`idUser` = :idUser ORDER BY roomDateLastMessage DESC LIMIT 10;
+		WHERE `user`.`idUser` = :idUser ORDER BY roomDateLastMessage DESC LIMIT 50;
 		";
 	}
 	static public function viewRoomsArray($idUser) {
@@ -229,7 +229,7 @@ class RequestSql {
 		author, 
 		messageText 
 		FROM `message` 
-		WHERE idRoom = (SELECT idRoom FROM `room` WHERE roomName = :roomName LIMIT 1) ORDER BY messageDateCreate DESC LIMIT 50;
+		WHERE idRoom = (SELECT idRoom FROM `room` WHERE roomName = :roomName LIMIT 1) ORDER BY messageDateCreate DESC LIMIT 100;
 		";
 	}
 	static public function viewMessagesArray($roomName) {

@@ -1,11 +1,15 @@
 <?php
 
-$resultFromSecondRequest = readRequest(
-    searchUserNameRequest(), 
-    searchUserNameArray($_POST['username'])
-);
+$resultFromSecondRequest = false;
 
-if(compareHashPass($_POST['password'], $resultFromSecondRequest[0]['userPass'])){
+if( isset($_POST['username']) && strlen($_POST['username']) <= 50 ){
+    $resultFromSecondRequest = readRequest(
+        searchUserNameRequest(), 
+        searchUserNameArray($_POST['username'])
+    );
+}
+
+if($resultFromSecondRequest == true && compareHashPass($_POST['password'], $resultFromSecondRequest[0]['userPass'])){
 
     sendRequest(
         deleteUserAccountRequest(), 

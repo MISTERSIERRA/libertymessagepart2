@@ -23,9 +23,6 @@ if(strlen($_POST['newpassword']) <= 20){
         $responseData = ['response' => 'informations incorrectes'];
     }
 }
-else if(!(strlen($_POST['newpassword']) <= 20)){
-    $responseData = ['response' => 'Mot de passe trop long'];
-}
 else{
     $responseData = ['response' => 'informations incorrectes'];
 }

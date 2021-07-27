@@ -2,7 +2,8 @@
 
 if(isset($_POST['username']) 
 && $_POST['username'] !== '' 
-&& $_POST['username'] !== 'Profil supprimé'){
+&& $_POST['username'] !== 'Profil supprimé' 
+&& strlen($_POST['username']) <= 50 ){
 
     $responseData = ['response' => 'demande non traitée'];
 
