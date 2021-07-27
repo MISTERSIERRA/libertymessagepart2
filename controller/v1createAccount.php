@@ -3,8 +3,8 @@
 if(isset($_POST['username']) 
 && $_POST['username'] !== '' 
 && $_POST['username'] !== 'Profil supprimé' 
-&& strlen($_POST['username']) <= 100 
-&& strlen($_POST['password']) <= 200 ){
+&& strlen($_POST['username']) <= 50 
+&& strlen($_POST['password']) <= 20 ){
 
     $responseData = ['response' => 'demande non traitée'];
 
@@ -28,6 +28,15 @@ if(isset($_POST['username'])
 
     sendJsonToAngular($responseData);
 }
+else if(!(strlen($_POST['username']) <= 50)){
+    $responseData = ['response' => 'Identifiant trop long'];
+    sendJsonToAngular($responseData);
+}
+else if(!(strlen($_POST['password']) <= 20)){
+    $responseData = ['response' => 'Mot de passe trop long'];
+    sendJsonToAngular($responseData);
+}
+
 else{
     $responseData = ['response' => 'données non conformes'];
     sendJsonToAngular($responseData);
