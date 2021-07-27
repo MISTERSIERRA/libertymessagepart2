@@ -28,14 +28,6 @@ if(isset($_POST['username'])
 
     sendJsonToAngular($responseData);
 }
-else if(!(strlen($_POST['username']) <= 50)){
-    $responseData = ['response' => 'Identifiant trop long'];
-    sendJsonToAngular($responseData);
-}
-else if(!(strlen($_POST['password']) <= 20)){
-    $responseData = ['response' => 'Mot de passe trop long'];
-    sendJsonToAngular($responseData);
-}
 
 else{
     $responseData = ['response' => 'données non conformes'];
