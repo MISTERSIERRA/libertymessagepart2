@@ -1,6 +1,5 @@
 <?php
 
-// ajouter condition
 if(strlen($_POST['newusername']) <= 50){
     $resultFromRequest = readRequest(
         searchUserNameRequest(), 
@@ -33,9 +32,6 @@ if(strlen($_POST['newusername']) <= 50){
         }
 
     }
-}
-else if(!(strlen($_POST['newusername']) <= 50)){
-    $responseData = ['response' => 'Identifiant trop long'];
 }
 else{
     $responseData = ['response' => 'informations incorrectes'];

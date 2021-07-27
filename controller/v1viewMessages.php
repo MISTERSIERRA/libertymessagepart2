@@ -1,9 +1,13 @@
 <?php
 
-$resultFromViewMessagesRequest = readRequest(
+$resultFromViewMessagesRequest = false;
+
+if(isset($_POST['roomname']) && strlen($_POST['roomname']) <= 100 ){
+    $resultFromViewMessagesRequest = readRequest(
     viewMessagesRequest(), 
     viewMessagesArray($_POST['roomname'])
-);
+    );
+}
 
 if($resultFromViewMessagesRequest == true){
     for($i1 = 0; $i1 < count($resultFromViewMessagesRequest); $i1++){
