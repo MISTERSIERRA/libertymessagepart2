@@ -5,11 +5,11 @@ $resultFromSecondRequest = false;
 if(isset($_POST['target']) && strlen($_POST['target']) <= 50 ){
     $resultFromSecondRequest = readRequest(
     readUserNameRequest(), 
-    readUserNameArray($_POST['target'])
+    readUserNameArray( trim($_POST['target']) )
     );
 }
 
-if($resultFromSecondRequest == true && $resultFromSecondRequest[0]['userName'] === $_POST['target']){
+if($resultFromSecondRequest == true && $resultFromSecondRequest[0]['userName'] === trim($_POST['target']) ){
 
     $resultFromThirdRequest = readRequest(
         verifyRoomRequest(), 

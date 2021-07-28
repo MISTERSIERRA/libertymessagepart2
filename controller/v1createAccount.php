@@ -10,17 +10,17 @@ if(isset($_POST['username'])
 
     $resultFromRequest = readRequest(
         readUserNameRequest(), 
-        readUserNameArray($_POST['username'])
+        readUserNameArray( trim($_POST['username']) )
     );
 
-    if($resultFromRequest == true && $resultFromRequest[0]['userName'] === $_POST['username']){
+    if($resultFromRequest == true && $resultFromRequest[0]['userName'] === trim($_POST['username']) ){
         $responseData = ['response' => 'ce nom est déjà pris'];
     }
     else{
         
         sendRequest(
             createAccountRequest(), 
-            createAccountArray($_POST['username'], generateHashPass($_POST['password']))
+            createAccountArray( trim($_POST['username']), generateHashPass($_POST['password']))
         );
         
         $responseData = ['response' => 'compte créé'];
