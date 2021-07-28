@@ -10,27 +10,30 @@ if(strlen($_POST['newusername']) <= 50){
 
         $resultFromSecondRequest = readRequest(
             readUserNameRequest(), 
-            readUserNameArray($_POST['newusername'])
+            readUserNameArray( trim($_POST['newusername']) )
         );
 
-        if($resultFromSecondRequest == true && $resultFromSecondRequest[0]['userName'] === $_POST['newusername']){
+        if($resultFromSecondRequest == true && $resultFromSecondRequest[0]['userName'] === trim($_POST['newusername']) ){
             $responseData = ['response' => 'ce nouveau nom est déjà pris'];
         }
         elseif($_POST['newusername'] === '' || $_POST['newusername'] === ' '){
-            $responseData = ['response' => 'ce nouveau n\'est pas valable'];
+            $responseData = ['response' => 'ce nouveau nom n\'est pas valable'];
         }
         else{
             sendRequest(
                 renameUserRequest(), 
-                renameUserArray($resultFromRequest[0]['idUser'], $_POST['newusername'])
+                renameUserArray($resultFromRequest[0]['idUser'], trim($_POST['newusername']) )
             );
             $responseData = [
                 'response' => 'nom modifié', 
                 'number' => $numberConnectFromVerifyToken, 
-                'name' => $_POST['newusername']
+                'name' => trim($_POST['newusername'])
             ];
         }
 
+    }
+    else{
+        $responseData = ['response' => 'informations incorrectes'];
     }
 }
 else{
