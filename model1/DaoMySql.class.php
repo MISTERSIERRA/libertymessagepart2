@@ -22,10 +22,10 @@ class DaoMySql {
 			.";dbname=".self::$bdd.";charset=utf8", self::$user, self::$password);
 			self::$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 		}
-		catch(PDOExeption $e){
+		catch(PDOException $e){
 			self::$errorDetected[] = $e;
 		}
-		catch(Exeption $e){
+		catch(Exception $e){
 			self::$errorDetected[] = $e;
 		}
     }
@@ -41,10 +41,10 @@ class DaoMySql {
         	$requestPrepare->execute($arrayExecute);
 		}
 
-		catch(PDOExeption $e){
+		catch(PDOException $e){
 			self::$errorDetected[] = $e;
 		}
-		catch(Exeption $e){
+		catch(Exception $e){
 			self::$errorDetected[] = $e;
 		}
 	}
@@ -57,10 +57,10 @@ class DaoMySql {
 			$requestPrepare->execute($arrayExecute);
 			$resultFromReadRequest = $requestPrepare->fetchAll();
 		}
-		catch(PDOExeption $e){
+		catch(PDOException $e){
 			self::$errorDetected[] = $e;
 		}
-		catch(Exeption $e){
+		catch(Exception $e){
 			self::$errorDetected[] = $e;
 		}
 
