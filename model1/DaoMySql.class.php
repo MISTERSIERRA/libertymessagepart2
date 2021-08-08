@@ -22,11 +22,11 @@ class DaoMySql {
 			.";dbname=".self::$bdd.";charset=utf8", self::$user, self::$password);
 			self::$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 		}
-		catch(PDOExeption $e){
-			self::$errorDetected[] = "Exeption PDO launchConnexion";
+		catch(PDOException $e){
+			self::$errorDetected[] = $e;
 		}
-		catch(Exeption $e){
-			self::$errorDetected[] = "Exeption launchConnexion";
+		catch(Exception $e){
+			self::$errorDetected[] = $e;
 		}
     }
 
@@ -34,16 +34,19 @@ class DaoMySql {
 		self::launchConnexion();
 		
 		try{
+			// préparer la requête
 			$requestPrepare = self::$connexion->prepare($requestToPrepare);
+
+			// exécuter la requête
         	$requestPrepare->execute($arrayExecute);
 		}
-		catch(PDOExeption $e){
-			self::$errorDetected[] = "Exeption PDO sendRequest";
+
+		catch(PDOException $e){
+			self::$errorDetected[] = $e;
 		}
-		catch(Exeption $e){
-			self::$errorDetected[] = "Exeption sendRequest";
+		catch(Exception $e){
+			self::$errorDetected[] = $e;
 		}
-		
 	}
 
     static public function readRequest($requestToPrepare, $arrayExecute) {
@@ -54,11 +57,11 @@ class DaoMySql {
 			$requestPrepare->execute($arrayExecute);
 			$resultFromReadRequest = $requestPrepare->fetchAll();
 		}
-		catch(PDOExeption $e){
-			self::$errorDetected[] = "Exeption PDO readRequest";
+		catch(PDOException $e){
+			self::$errorDetected[] = $e;
 		}
-		catch(Exeption $e){
-			self::$errorDetected[] = "Exeption readRequest";
+		catch(Exception $e){
+			self::$errorDetected[] = $e;
 		}
 
 		$requestPrepare->closeCursor();

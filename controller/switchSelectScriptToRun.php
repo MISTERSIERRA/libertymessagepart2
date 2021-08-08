@@ -1,7 +1,6 @@
 <?php
 
-// récupérer données de requête Angular
-// transférer les données vers variable POST
+// récupérer données de requête HTTP
 getContentFromAngular(file_get_contents("php://input"));
 
 // filtrer les entrées
