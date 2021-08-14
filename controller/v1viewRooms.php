@@ -19,7 +19,7 @@ if($resultFromViewRoomsRequest == true){
             }
 
             $roomlistArray[$i1]['roomname'] = $resultFromViewRoomsRequest[$i1]['roomName'];
-            $roomlistArray[$i1]['datelastmessage'] = $resultFromViewRoomsRequest[$i1]['roomDateLastmessage'];
+            $roomlistArray[$i1]['datelastmessage'] = $resultFromViewRoomsRequest[$i1]['roomDateLastMessageCustom'];
 
         }
 
