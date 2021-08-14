@@ -170,7 +170,7 @@ class RequestSql {
 		idUserA, userNameA, 
 		idUserB, userNameB, 
 		roomName, 
-		DATE_FORMAT(roomDateLastMessage, '%d/%m/%y %H:%i:%s') as roomDateLastmessage 
+		DATE_FORMAT(roomDateLastMessage, '%d/%m/%y %H:%i:%s') as roomDateLastMessageCustom 
 		FROM `user` 
 		LEFT JOIN `access` 
 		ON `user`.`idUser` = `access`.`idUser` 
@@ -225,7 +225,7 @@ class RequestSql {
 	static public function viewMessagesRequest() {
 		return "
 		SELECT 
-		DATE_FORMAT(messageDateCreate, '%d/%m/%y %H:%i:%s') as messageDateCreate, 
+		DATE_FORMAT(messageDateCreate, '%d/%m/%y %H:%i:%s') as messageDateCreateCustom, 
 		author, 
 		messageText 
 		FROM `message` 
