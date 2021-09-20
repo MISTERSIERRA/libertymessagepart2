@@ -11,23 +11,26 @@ class DaoMySql {
 	static private $user = 'root'; // root 
     static private $password = ''; // '' 
     static private $bdd = 'libertymessage'; // 'libertymessage' 
-    static private $connexion;
+    static private $connexion = null; // singleton
 	static private $errorDetected = [];
 
 
     // connexion à la base de donnée
     static private function launchConnexion() {
-		try{
-			self::$connexion = new PDO("mysql:host=".self::$host
-			.";dbname=".self::$bdd.";charset=utf8", self::$user, self::$password);
-			self::$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+		if(self::$connexion === null){
+			try{
+				self::$connexion = new PDO("mysql:host=".self::$host
+				.";dbname=".self::$bdd.";charset=utf8", self::$user, self::$password);
+				self::$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+			}
+			catch(PDOException $e){
+				self::$errorDetected[] = $e;
+			}
+			catch(Exception $e){
+				self::$errorDetected[] = $e;
+			}
 		}
-		catch(PDOException $e){
-			self::$errorDetected[] = $e;
-		}
-		catch(Exception $e){
-			self::$errorDetected[] = $e;
-		}
+		return self::$connexion;
     }
 
     static public function sendRequest($requestToPrepare, $arrayExecute) {
@@ -65,9 +68,18 @@ class DaoMySql {
 		}
 
 		$requestPrepare->closeCursor();
-		self::$connexion=null;
+		// self::$connexion=null;
         
         return $resultFromReadRequest;
+	}
+
+	static public function requestCloseConnexion() {
+		if(self::$connexion === null){
+			return;
+		}
+		else{
+			self::$connexion = null;
+		}
 	}
 
 }

@@ -50,7 +50,9 @@ function readRequest($requestToPrepare, $arrayExecute) {
     return \version1\DaoMySql::readRequest($requestToPrepare, $arrayExecute);
 }
 
-
+function requestCloseConnexion() {
+    return \version1\DaoMySql::requestCloseConnexion();
+}
 
 
 // classe RequestSql

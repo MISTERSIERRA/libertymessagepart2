@@ -2,6 +2,8 @@
 
 namespace version1;
 
+use \version1\DaoMySql;
+
 class TalkToApp {
 
     static private function sendJsonError($code, $message) {
@@ -13,6 +15,7 @@ class TalkToApp {
     static public function sendJsonToAngular($data) {
         header('Content-Type: application/json');
         echo json_encode($data);
+        requestCloseConnexion(); // singleton PDO
         die();
     }
     static public function getContentFromAngular($inputInJsonFormat) {
