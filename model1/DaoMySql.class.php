@@ -3,6 +3,8 @@
 namespace version1;
 
 use \PDO;
+use \Exception;
+use \PDOException;
 
 class DaoMySql {
 
